@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Student Task Manager</title>
+    <link rel="stylesheet" href="Style.css">
+    <script src="JavaScript/Script.js" defer></script>
+</head>
+<body class="dashboard-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">📚</span>
+            <h2>Study Tutor</h2>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active"><span class="nav-icon">🏠</span> Home</a>
+            <a href="#" class="nav-item"><span class="nav-icon">✅</span> Tasks</a>
+            <a href="#" class="nav-item"><span class="nav-icon">📅</span> Schedule</a>
+            <a href="#" class="nav-item"><span class="nav-icon">📊</span> Progress</a>
+            <a href="#" class="nav-item"><span class="nav-icon">🔔</span> Reminders</a>
+            <a href="About.html" class="nav-item"><span class="nav-icon">ℹ️</span> About</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="Login.html" class="nav-item logout"><span class="nav-icon">🔓</span> Logout</a>
+        </div>
+    </aside>
+    <main>
+        <header>
+            <div class="header-welcome">
+                <h1>Welcome back<span id="header-username"></span> 👋</h1>
+                <p id="header-greeting">Have a productive session today!</p>
+            </div>
+            <div class="header-datetime">
+                <span id="live-time">00:00:00</span>
+                <span id="live-date">Loading...</span>
+            </div>
+            <div class="header-user">
+                <div class="user-avatar" id="user-avatar"></div>
+                <div class="user-info">
+                    <p class="user-name" id="user-fullname">USER</p>
+                    <p class="user-id" id="user-id">USR-00001</p>
+                </div>
+                <span class="user-badge">Student 🎓 </span>
+            </div>
+        </header>
+    </main>
+</body>
+</html>
