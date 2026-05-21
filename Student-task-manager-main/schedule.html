@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<title>Schedule</title>
+
+<style>
+
+body{
+font-family:Inter,sans-serif;
+background:#f4f7fb;
+padding:30px;
+margin:0;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+}
+
+h1{
+color:#111827;
+margin-bottom:25px;
+}
+
+.schedule-card{
+
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:15px;
+box-shadow:0px 5px 15px rgba(0,0,0,.1);
+
+display:flex;
+gap:20px;
+align-items:center;
+}
+
+.time{
+
+background:#111827;
+color:white;
+padding:15px;
+border-radius:12px;
+width:110px;
+text-align:center;
+font-weight:bold;
+}
+
+.details h3{
+
+margin-bottom:10px;
+color:#111827;
+}
+
+.details p{
+
+color:gray;
+margin:5px 0;
+}
+
+.exit{
+
+display:flex;
+justify-content:center;
+margin-top:40px;
+}
+
+.exit button{
+
+padding:12px 25px;
+border:none;
+background:#ef4444;
+color:white;
+border-radius:10px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📅 Today's Schedule</h1>
+
+<div class="schedule-card">
+
+<div class="time">
+9:00 AM
+</div>
+
+<div class="details">
+
+<h3>Java Programming</h3>
+
+<p>📍 Room A201</p>
+
+<p>👨‍🏫 Prof. David</p>
+
+</div>
+
+</div>
+
+<div class="schedule-card">
+
+<div class="time">
+11:00 AM
+</div>
+
+<div class="details">
+
+<h3>Database Systems</h3>
+
+<p>📍 Room B105</p>
+
+<p>👨‍🏫 Prof. John</p>
+
+</div>
+
+</div>
+
+<div class="schedule-card">
+
+<div class="time">
+2:00 PM
+</div>
+
+<div class="details">
+
+<h3>Mini Project Discussion</h3>
+
+<p>📍 Lab 3</p>
+
+<p>👨‍🏫 Project Guide</p>
+
+</div>
+
+</div>
+
+<div class="exit">
+
+<button onclick="goBack()">
+
+← Exit to Dashboard
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function goBack(){
+
+window.location="Dashboard.html";
+
+}
+
+</script>
+
+</body>
+</html>

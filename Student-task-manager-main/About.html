@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Student Task Manager</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f9fafb;
+            padding: 40px 20px;
+        }
+
+        .about-card {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 36px 32px;
+            width: 600px;
+            max-width: 100%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .about-card h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 12px;
+        }
+
+        .about-card > p {
+            color: #6b7280;
+            line-height: 1.6;
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f3f4f6;
+            color: #374151;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: "→";
+            color: #9ca3af;
+            margin-right: 10px;
+        }
+
+        .feature-list li strong {
+            color: #111827;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            border: 1px solid #d1d5db;
+            background: #fff;
+            color: #111827;
+            transition: background 0.15s ease;
+        }
+
+        .back-button:hover {
+            background: #f3f4f6;
+        }
+    </style>
+    <script src="JavaScript/Script.js"></script>
+</head>
+
+<body>
+    <div class="about-card">
+        <h2>Features & Capabilities</h2>
+        <p>
+            Stay organized, focused, and on top of your academic responsibilities effortlessly. Here is a look at the core features of the Student Task Manager:
+        </p>
+        <ul class="feature-list">
+            <li><strong>Clean & Interactive UI:</strong> Enjoy a simple, user-friendly interface that makes managing tasks quick and stress-free.</li>
+            <li><strong>Track Assignments:</strong> Never miss a deadline by logging all your homework, essays, and major projects.</li>
+            <li><strong>Prioritize Work:</strong> Sort your to-do lists by urgency or subject to ensure you tackle the most important goals first.</li>
+            <li><strong>Set Reminders:</strong> Keep track of upcoming exams and assignment submission dates with easy reminders.</li>
+            <li><strong>Smart Alerts:</strong> Get notified about upcoming deadlines and pending tasks.</li>
+            <li><strong>Progress Dashboard:</strong> View charts or summaries of completed and pending tasks.</li>
+            <li><strong>Monitor Progress:</strong> Visualize your work completion to see how close you are to achieving your study objectives.</li>
+            <li><strong>Study Planning:</strong> Break down large syllabus topics or exam prep into manageable daily milestones.</li>
+            <li><strong>Dark Mode Support:</strong> Switch between light and dark themes for comfortable viewing anytime.</li>
+        </ul>
+        <button class="back-button" onclick="window.location.href='Login.html'">Back to Login</button>
+    </div>
+</body>
+</html>

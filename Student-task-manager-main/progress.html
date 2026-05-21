@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<title>Progress</title>
+
+<style>
+
+body{
+
+font-family:Inter,sans-serif;
+background:#f4f7fb;
+padding:30px;
+margin:0;
+
+}
+
+.container{
+
+max-width:1000px;
+margin:auto;
+
+}
+
+h1{
+
+margin-bottom:30px;
+color:#111827;
+
+}
+
+.cards{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+
+}
+
+.card{
+
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0px 5px 15px rgba(0,0,0,.1);
+text-align:center;
+
+}
+
+.number{
+
+font-size:35px;
+font-weight:bold;
+margin-top:15px;
+color:#111827;
+}
+
+.progress-container{
+
+margin-top:30px;
+background:white;
+padding:25px;
+border-radius:15px;
+box-shadow:0px 5px 15px rgba(0,0,0,.1);
+
+}
+
+.progress-bar{
+
+width:100%;
+height:30px;
+background:#ddd;
+border-radius:20px;
+overflow:hidden;
+
+}
+
+.progress{
+
+width:75%;
+height:100%;
+background:#16a34a;
+
+}
+
+.exit{
+
+margin-top:40px;
+display:flex;
+justify-content:center;
+
+}
+
+.exit button{
+
+padding:12px 25px;
+background:#ef4444;
+border:none;
+color:white;
+border-radius:10px;
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>📊 Progress Overview</h1>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Total Tasks</h3>
+
+<div class="number">
+15
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Completed</h3>
+
+<div class="number">
+11
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Pending</h3>
+
+<div class="number">
+4
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>Performance</h3>
+
+<div class="number">
+75%
+</div>
+
+</div>
+
+</div>
+
+<div class="progress-container">
+
+<h2>Task Completion Progress</h2>
+
+<br>
+
+<div class="progress-bar">
+
+<div class="progress">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="exit">
+
+<button onclick="goBack()">
+
+← Exit to Dashboard
+
+</button>
+
+</div>
+
+</div>
+
+<script>
+
+function goBack(){
+
+window.location="Dashboard.html";
+
+}
+
+</script>
+
+</body>
+</html>
