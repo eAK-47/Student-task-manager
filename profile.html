@@ -399,5 +399,55 @@
       </div>
     </div>
   </footer>
+  <script>
+    // Toggle between View Mode and Edit Mode
+    function toggleMode(isEdit) {
+      document.getElementById('viewMode').style.display = isEdit ? 'none' : 'block';
+      document.getElementById('editMode').style.display = isEdit ? 'block' : 'none';
+      
+      if (isEdit) {
+        document.getElementById('inputName').value = document.getElementById('viewName').innerText;
+        document.getElementById('inputEmail').value = document.getElementById('viewEmail').innerText;
+        document.getElementById('inputPhone').value = document.getElementById('viewPhone').innerText;
+        document.getElementById('inputStudentID').value = document.getElementById('viewStudentID').innerText;
+        document.getElementById('inputYear').value = document.getElementById('viewYear').innerText;
+        document.getElementById('College').value = document.getElementById('viewAddress').innerText;
+        document.getElementById('inputGoal').value = document.getElementById('viewGoal').innerText;
+      }
+    }
+
+    // Save form values back to the UI view dynamically
+    function saveProfile(event) {
+      event.preventDefault();
+
+      let name = document.getElementById('inputName').value;
+      let email = document.getElementById('inputEmail').value;
+      let phone = document.getElementById('inputPhone').value;
+      let studentID = document.getElementById('inputStudentID').value;
+      let year = document.getElementById('inputYear').value;
+      let college = document.getElementById('College').value;
+      let goal = document.getElementById('inputGoal').value;
+
+      document.getElementById('viewName').innerText = name;
+      document.getElementById('viewHeadingName').innerText = name;
+      document.getElementById('viewEmail').innerText = email;
+      document.getElementById('viewPhone').innerText = phone;
+      document.getElementById('viewStudentID').innerText = studentID;
+      document.getElementById('viewYear').innerText = year;
+      document.getElementById('viewHeadingYear').innerText = year;
+      document.getElementById('viewAddress').innerText = college;
+      document.getElementById('viewGoal').innerText = goal;
+
+      let alertBox = document.getElementById('saveAlert');
+      alertBox.style.display = 'flex';
+      setTimeout(() => { alertBox.style.display = 'none'; }, 3000);
+
+      toggleMode(false);
+    }
+
+    function goBack() {
+      window.location.href = "Dashboard.html";
+    }
+  </script>
 </body>
 </html>
