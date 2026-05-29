@@ -5,237 +5,458 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Student Profile — Student Task Manager</title>
   
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/style.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   
+  <!-- Premium Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
+    :root {
+      --bg-dark: #04090d; /* Premium deep slate-black */
+      --card-bg: linear-gradient(135deg, rgba(8, 20, 16, 0.6) 0%, rgba(3, 8, 12, 0.5) 100%);
+      --primary: #10b981; /* Premium Emerald */
+      --primary-rgb: 16, 185, 129;
+      --primary-hover: #059669;
+      --accent-gold: #f59e0b; /* Aurora Gold */
+      --accent-mint: #34d399; /* Mint Green */
+      --accent-cyan: #06b6d4; /* Electric Cyan */
+      --text-white: #f1f5f9;
+      --text-gray: #94a3b8;
+      --success: #34d399;
+      --danger: #f87171;
+      --border-light: rgba(16, 185, 129, 0.08);
+    }
+
     body {
-      background-color: #060d1a;
-      color: #f8fafc;
-      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
     
-    /* Background Orbs */
+    /* Map Bootstrap primary to Emerald Green */
+    .text-primary {
+      color: var(--primary) !important;
+    }
+    
+    /* Premium Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(var(--primary-rgb), 0.4);
+    }
+    
+    /* Background Orbs with Fluid Floating Animations (Emerald & Aurora Gold Theme) */
     .bg-orb {
       position: absolute;
-      width: 400px;
-      height: 400px;
+      width: 450px;
+      height: 450px;
       border-radius: 50%;
-      filter: blur(120px);
+      filter: blur(130px);
       z-index: 0;
       opacity: 0.15;
       pointer-events: none;
+      transition: all 1s ease;
     }
-    .bg-orb-1 { top: -10%; left: -10%; background: #2563eb; }
-    .bg-orb-2 { top: 40%; right: -10%; background: #7c3aed; }
+    .bg-orb-1 { 
+      top: -10%; 
+      left: -10%; 
+      background: radial-gradient(circle, var(--primary) 0%, #047857 100%); 
+      animation: float-orb-1 20s infinite alternate ease-in-out;
+    }
+    .bg-orb-2 { 
+      top: 35%; 
+      right: -10%; 
+      background: radial-gradient(circle, var(--accent-gold) 0%, #b45309 100%); 
+      animation: float-orb-2 25s infinite alternate ease-in-out;
+    }
+    .bg-orb-3 { 
+      bottom: -10%; 
+      left: 15%; 
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, var(--accent-mint) 0%, #065f46 100%); 
+      opacity: 0.08;
+      animation: float-orb-3 18s infinite alternate ease-in-out;
+    }
+
+    @keyframes float-orb-1 {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(60px, 40px) scale(1.12); }
+      100% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+    @keyframes float-orb-2 {
+      0% { transform: translate(0, 0) scale(1.1); }
+      50% { transform: translate(-50px, -40px) scale(0.88); }
+      100% { transform: translate(30px, 40px) scale(1.05); }
+    }
+    @keyframes float-orb-3 {
+      0% { transform: translate(0, 0) scale(0.9); }
+      50% { transform: translate(45px, -35px) scale(1.15); }
+      100% { transform: translate(-25px, 15px) scale(1); }
+    }
     
-    /* Glassmorphism Components */
+    /* Glassmorphism Navbar with Glow Border */
     .glass-navbar {
-      background: rgba(6, 13, 26, 0.8) !important;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-    
-    .glass-card {
-      background: rgba(15, 23, 42, 0.4);
+      background: rgba(4, 9, 13, 0.8) !important;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 1.25rem;
-      padding: 2.5rem;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+    .glass-navbar .nav-link {
+      font-size: 0.95rem;
+      font-weight: 500;
       position: relative;
+      transition: color 0.3s ease;
+      padding: 0.5rem 1rem !important;
+    }
+    .glass-navbar .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      width: 0; height: 2px;
+      background: var(--primary);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    .glass-navbar .nav-link:hover::after,
+    .glass-navbar .nav-link.active::after {
+      width: 60%;
+    }
+    .glass-navbar .nav-link:hover {
+      color: var(--primary) !important;
+    }
+    .glass-navbar .nav-link.text-secondary {
+      color: var(--text-gray) !important;
+    }
+    
+    /* Premium Glassmorphism Cards */
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border-light);
+      border-radius: 1.5rem;
+      padding: 3rem;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    /* Elegant Gold and Mint Border Gradient overlay on card */
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 1.5rem;
+      padding: 1.5px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(16, 185, 129, 0.15) 40%, rgba(245, 158, 11, 0.3) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 1;
     }
     
     .profile-header {
       display: flex;
       align-items: center;
-      gap: 1.5rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 1.75rem;
+      border-bottom: 1px solid rgba(16, 185, 129, 0.12);
       padding-bottom: 2rem;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
+      z-index: 2;
+      position: relative;
     }
     
     @media (max-width: 576px) {
       .profile-header {
         flex-direction: column;
         text-align: center;
+        gap: 1.25rem;
       }
     }
     
+    /* Majestic Emerald & Gold Avatar Frame */
     .avatar-wrapper {
-      width: 90px;
-      height: 90px;
+      width: 95px;
+      height: 95px;
       border-radius: 50%;
-      background: rgba(37, 99, 235, 0.1);
-      border: 2px solid rgba(37, 99, 235, 0.3);
-      color: #60a5fa;
-      font-size: 3rem;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(245, 158, 11, 0.15) 100%);
+      border: 2px solid rgba(16, 185, 129, 0.35);
+      color: var(--accent-mint);
+      font-size: 3.2rem;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.25);
+      position: relative;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+    }
+    .avatar-wrapper::after {
+      content: '👑';
+      position: absolute;
+      font-size: 0.95rem;
+      bottom: -4px;
+      right: -4px;
+      background: #04090d;
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      animation: sparkle 3s infinite ease-in-out;
+    }
+    @keyframes sparkle {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.15) rotate(15deg); }
+    }
+    .avatar-wrapper:hover {
+      transform: scale(1.05) rotate(3deg);
+      border-color: var(--accent-gold);
+      box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+      color: var(--accent-gold);
     }
     
-    .info-group {
-      margin-bottom: 1.5rem;
+    /* Styled Emerald-Glow Info Cards */
+    .info-card {
+      background: rgba(255, 255, 255, 0.015);
+      border: 1px solid rgba(16, 185, 129, 0.06);
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .info-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--primary), var(--accent-gold));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .info-card:hover {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(16, 185, 129, 0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+    .info-card:hover::before {
+      opacity: 1;
     }
     
     .glass-label {
-      font-size: 0.8rem;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.78rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: #94a3b8;
-      margin-bottom: 0.5rem;
+      letter-spacing: 0.08em;
+      color: var(--accent-mint);
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
     
     .info-value {
-      font-size: 1.1rem;
-      color: #f8fafc;
-      padding: 0.25rem 0;
-      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--text-white);
+      font-weight: 600;
+      padding: 0.15rem 0;
+      letter-spacing: -0.01em;
     }
     
-    /* Premium Glass Inputs */
+    /* Premium Aurora Inputs */
     .glass-input, .glass-select, .glass-textarea {
-      background: rgba(255, 255, 255, 0.04) !important;
-      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      background: rgba(255, 255, 255, 0.02) !important;
+      border: 1px solid rgba(16, 185, 129, 0.12) !important;
       color: #ffffff !important;
-      border-radius: 0.75rem !important;
-      padding: 0.75rem 1rem !important;
-      transition: all 0.2s ease !important;
+      border-radius: 0.85rem !important;
+      padding: 0.85rem 1.2rem !important;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
       width: 100%;
     }
-    
+    .glass-input::placeholder, .glass-textarea::placeholder {
+      color: rgba(255, 255, 255, 0.25) !important;
+    }
     .glass-input:focus, .glass-select:focus, .glass-textarea:focus {
-      background: rgba(255, 255, 255, 0.08) !important;
-      border-color: rgba(37, 99, 235, 0.5) !important;
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15) !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+      border-color: rgba(16, 185, 129, 0.5) !important;
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.18) !important;
       outline: none !important;
+      transform: translateY(-1px);
     }
     
     .glass-select option {
-      background-color: #0d1527;
+      background-color: #050b0f;
       color: white;
     }
     
+    /* Button Custom styling with beautiful hover scale effects */
     .btn-custom-outline {
-      background-color: transparent;
+      background-color: rgba(255, 255, 255, 0.01);
       color: #cbd5e1;
-      border: 1px solid #334155;
-      padding: 0.75rem 1.75rem;
-      border-radius: 0.75rem;
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      padding: 0.8rem 1.85rem;
+      border-radius: 0.85rem;
       font-weight: 600;
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.55rem;
     }
     .btn-custom-outline:hover {
-      background-color: #1e293b;
+      background-color: rgba(16, 185, 129, 0.06);
       color: white;
-      border-color: #475569;
+      border-color: rgba(16, 185, 129, 0.3);
+      transform: translateY(-2px);
+    }
+    .btn-custom-outline:active {
+      transform: translateY(0);
     }
     
     .btn-custom-primary {
-      background-color: #2563eb;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
       color: white;
       border: none;
-      padding: 0.75rem 1.75rem;
-      border-radius: 0.75rem;
+      padding: 0.8rem 1.85rem;
+      border-radius: 0.85rem;
       font-weight: 600;
-      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.55rem;
     }
     .btn-custom-primary:hover {
-      background-color: #1d4ed8;
-      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+      background: linear-gradient(135deg, var(--primary-hover) 0%, #047857 100%);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+      transform: translateY(-2px);
       color: white;
+    }
+    .btn-custom-primary:active {
+      transform: translateY(0);
     }
     
     .btn-custom-danger {
-      background-color: rgba(239, 68, 68, 0.1);
+      background-color: rgba(239, 68, 68, 0.08);
       border: 1px solid rgba(239, 68, 68, 0.2);
       color: #f87171;
-      padding: 0.75rem 1.75rem;
-      border-radius: 0.75rem;
+      padding: 0.8rem 1.85rem;
+      border-radius: 0.85rem;
       font-weight: 600;
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.55rem;
     }
     .btn-custom-danger:hover {
-      background-color: #ef4444;
+      background-color: var(--danger);
+      border-color: var(--danger);
       color: white;
-      box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+      box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+      transform: translateY(-2px);
+    }
+    .btn-custom-danger:active {
+      transform: translateY(0);
     }
     
+    /* Styled badges */
     .badge-custom {
-      background: rgba(37, 99, 235, 0.1);
-      border: 1px solid rgba(37, 99, 235, 0.3);
-      color: #93c5fd;
-      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(245, 158, 11, 0.12) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #a7f3d0;
+      padding: 0.5rem 1.25rem;
       border-radius: 50px;
       font-size: 0.8rem;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);
     }
     
     .pulse-dot {
-      width: 6px;
-      height: 6px;
-      background-color: #60a5fa;
+      width: 7px;
+      height: 7px;
+      background-color: var(--accent-mint);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
     @keyframes pulse {
-      0% { transform: scale(0.95); opacity: 0.5; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(0.95); opacity: 0.5; }
+      0% { transform: scale(0.9); opacity: 0.4; }
+      50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 8px var(--accent-mint); }
+      100% { transform: scale(0.9); opacity: 0.4; }
     }
     
+    /* Sleek Custom Alert with slide down fade */
     .alert-custom {
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: #34d399;
-      border-radius: 0.75rem;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--accent-mint);
+      border-radius: 1rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
       display: none;
       align-items: center;
-      gap: 0.5rem;
-      animation: fadeIn 0.3s ease;
+      gap: 0.75rem;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.12);
+      animation: slideDownFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-10px); }
+    @keyframes slideDownFade {
+      from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
     footer {
       margin-top: auto;
+      background: rgba(3, 7, 10, 0.8) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(16, 185, 129, 0.08) !important;
     }
   </style>
 </head>
 <body>
 
+  <!-- Animated Ambient Glass Orbs (Emerald & Gold Aurora) -->
   <div class="bg-orb bg-orb-1"></div>
   <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top glass-navbar py-3">
@@ -270,10 +491,10 @@
     <div class="row justify-content-center">
       <div class="col-lg-8">
         
-        <!-- Custom Alert -->
+        <!-- Custom Success Alert -->
         <div id="saveAlert" class="alert-custom">
-          <span>✓</span>
-          <span>Profile details saved successfully!</span>
+          <span style="font-size: 1.25rem;">✨</span>
+          <span class="fw-semibold">Success:</span> Your profile details have been saved & synchronized!
         </div>
         
         <div class="glass-card">
@@ -283,7 +504,7 @@
             <div class="profile-header">
               <div class="avatar-wrapper">👤</div>
               <div>
-                <h2 id="viewHeadingName" class="text-white fw-bold mb-1">Akash S Kishor</h2>
+                <h2 id="viewHeadingName" class="text-white fw-bold mb-1" style="font-family: 'Outfit', sans-serif;">Akash S Kishor</h2>
                 <div class="badge-custom">
                   <span class="pulse-dot"></span>
                   <span id="viewHeadingYear">1st Year</span>
@@ -291,38 +512,52 @@
               </div>
             </div>
             
-            <div class="row">
-              <div class="col-md-6 info-group">
-                <div class="glass-label">Student Name</div>
-                <div id="viewName" class="info-value">Akash S Kishor</div>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="info-card">
+                  <div class="glass-label">👤 Student Name</div>
+                  <div id="viewName" class="info-value">Akash S Kishor</div>
+                </div>
               </div>
-              <div class="col-md-6 info-group">
-                <div class="glass-label">Email ID</div>
-                <div id="viewEmail" class="info-value">akashskishor2006@student.edu</div>
+              <div class="col-md-6">
+                <div class="info-card">
+                  <div class="glass-label">✉️ Email ID</div>
+                  <div id="viewEmail" class="info-value">akashskishor2006@student.edu</div>
+                </div>
               </div>
-              <div class="col-md-6 info-group">
-                <div class="glass-label">Phone Number</div>
-                <div id="viewPhone" class="info-value">+91 98765 43210</div>
+              <div class="col-md-6">
+                <div class="info-card">
+                  <div class="glass-label">📞 Phone Number</div>
+                  <div id="viewPhone" class="info-value">+91 98765 43210</div>
+                </div>
               </div>
-              <div class="col-md-6 info-group">
-                <div class="glass-label">Student ID</div>
-                <div id="viewStudentID" class="info-value">STU-2026-084</div>
+              <div class="col-md-6">
+                <div class="info-card">
+                  <div class="glass-label">🆔 Student ID</div>
+                  <div id="viewStudentID" class="info-value">STU-2026-084</div>
+                </div>
               </div>
-              <div class="col-md-6 info-group">
-                <div class="glass-label">Academic Semester / Year</div>
-                <div id="viewYear" class="info-value">1st Year</div>
+              <div class="col-md-6">
+                <div class="info-card">
+                  <div class="glass-label">🎓 Academic Semester / Year</div>
+                  <div id="viewYear" class="info-value">1st Year</div>
+                </div>
               </div>
-              <div class="col-12 info-group">
-                <div class="glass-label">College</div>
-                <div id="viewAddress" class="info-value">Amrita Vishwa Vidyapeetham , Amritapuri, Kollam</div>
+              <div class="col-12">
+                <div class="info-card">
+                  <div class="glass-label">🏛️ College</div>
+                  <div id="viewAddress" class="info-value">Amrita Vishwa Vidyapeetham , Amritapuri, Kollam</div>
+                </div>
               </div>
-              <div class="col-12 info-group mb-0">
-                <div class="glass-label">Academic Study Objective / Goal</div>
-                <div id="viewGoal" class="info-value" style="font-style: italic;">Maintain high academic stand & complete tasks on schedule.</div>
+              <div class="col-12">
+                <div class="info-card">
+                  <div class="glass-label">🎯 Academic Study Objective / Goal</div>
+                  <div id="viewGoal" class="info-value" style="font-style: italic; color: #cbd5e1; font-weight: 500;">Maintain high academic stand & complete tasks on schedule.</div>
+                </div>
               </div>
             </div>
             
-            <div class="d-flex justify-content-between align-items-center mt-5 pt-3 border-top border-secondary border-opacity-10">
+            <div class="d-flex justify-content-between align-items-center mt-5 pt-4 border-top border-secondary border-opacity-10">
               <button onclick="goBack()" class="btn-custom-outline">← Back to Dashboard</button>
               <button onclick="toggleMode(true)" class="btn-custom-primary">✍ Edit Profile</button>
             </div>
@@ -333,31 +568,31 @@
             <div class="profile-header">
               <div class="avatar-wrapper">✍</div>
               <div>
-                <h2 class="text-white fw-bold mb-1">Edit Student Profile</h2>
+                <h2 class="text-white fw-bold mb-1" style="font-family: 'Outfit', sans-serif;">Edit Student Profile</h2>
                 <p class="text-secondary small mb-0">Update details which will be synchronized across your workspace.</p>
               </div>
             </div>
             
             <form id="profileForm" onsubmit="saveProfile(event)">
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <label for="inputName" class="glass-label d-block">Student Name</label>
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <label for="inputName" class="glass-label mb-2">👤 Student Name</label>
                   <input type="text" id="inputName" class="glass-input" required placeholder="Enter student name">
                 </div>
-                <div class="col-md-6 mb-3">
-                  <label for="inputEmail" class="glass-label d-block">Email Address</label>
+                <div class="col-md-6">
+                  <label for="inputEmail" class="glass-label mb-2">✉️ Email Address</label>
                   <input type="email" id="inputEmail" class="glass-input" required placeholder="Enter email address">
                 </div>
-                <div class="col-md-6 mb-3">
-                  <label for="inputPhone" class="glass-label d-block">Phone Number</label>
+                <div class="col-md-6">
+                  <label for="inputPhone" class="glass-label mb-2">📞 Phone Number</label>
                   <input type="tel" id="inputPhone" class="glass-input" required placeholder="Enter phone number">
                 </div>
-                <div class="col-md-6 mb-3">
-                  <label for="inputStudentID" class="glass-label d-block">Student ID / Roll No</label>
+                <div class="col-md-6">
+                  <label for="inputStudentID" class="glass-label mb-2">🆔 Student ID / Roll No</label>
                   <input type="text" id="inputStudentID" class="glass-input" required placeholder="Enter Student ID">
                 </div>
-                <div class="col-md-6 mb-3">
-                  <label for="inputYear" class="glass-label d-block">Academic Year</label>
+                <div class="col-md-6">
+                  <label for="inputYear" class="glass-label mb-2">🎓 Academic Year</label>
                   <select id="inputYear" class="glass-select form-select">
                     <option value="1st Year">1st Year</option>
                     <option value="2nd Year">2nd Year</option>
@@ -365,17 +600,17 @@
                     <option value="4th Year">4th Year</option>
                   </select>
                 </div>
-                <div class="col-12 mb-3">
-                  <label for="inputAddress" class="glass-label d-block">College</label>
+                <div class="col-12">
+                  <label for="College" class="glass-label mb-2">🏛️ College</label>
                   <input type="text" id="College" class="glass-input" required placeholder="Enter College Name">
                 </div>
-                <div class="col-12 mb-4">
-                  <label for="inputGoal" class="glass-label d-block">Academic Goal</label>
+                <div class="col-12">
+                  <label for="inputGoal" class="glass-label mb-2">🎯 Academic Goal</label>
                   <textarea id="inputGoal" class="glass-textarea form-control" rows="3" placeholder="Define your study goals..."></textarea>
                 </div>
               </div>
               
-              <div class="d-flex justify-content-between align-items-center pt-3 border-top border-secondary border-opacity-10">
+              <div class="d-flex justify-content-between align-items-center mt-5 pt-4 border-top border-secondary border-opacity-10">
                 <button type="button" onclick="toggleMode(false)" class="btn-custom-danger">✕ Cancel</button>
                 <button type="submit" class="btn-custom-primary">✓ Save Changes</button>
               </div>
@@ -389,7 +624,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="border-top border-secondary border-opacity-10 py-4 bg-black bg-opacity-40 position-relative z-1">
+  <footer class="border-top border-secondary border-opacity-10 py-4 position-relative z-1">
     <div class="container-xl">
       <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center text-center text-sm-start gap-3">
         <div>
@@ -399,5 +634,101 @@
       </div>
     </div>
   </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Premium Interactive JavaScript logic -->
+  <script>
+    // Toggle between View and Edit Modes
+    function toggleMode(isEdit) {
+      const viewMode = document.getElementById('viewMode');
+      const editMode = document.getElementById('editMode');
+      
+      if (isEdit) {
+        // Populate inputs from current view values before showing form
+        document.getElementById('inputName').value = document.getElementById('viewName').innerText;
+        document.getElementById('inputEmail').value = document.getElementById('viewEmail').innerText;
+        document.getElementById('inputPhone').value = document.getElementById('viewPhone').innerText;
+        document.getElementById('inputStudentID').value = document.getElementById('viewStudentID').innerText;
+        document.getElementById('inputYear').value = document.getElementById('viewYear').innerText;
+        document.getElementById('College').value = document.getElementById('viewAddress').innerText;
+        document.getElementById('inputGoal').value = document.getElementById('viewGoal').innerText;
+        
+        viewMode.style.display = 'none';
+        editMode.style.display = 'block';
+      } else {
+        viewMode.style.display = 'block';
+        editMode.style.display = 'none';
+      }
+    }
+
+    // Save profile details
+    function saveProfile(event) {
+      event.preventDefault();
+      
+      // Get values from inputs
+      const name = document.getElementById('inputName').value;
+      const email = document.getElementById('inputEmail').value;
+      const phone = document.getElementById('inputPhone').value;
+      const studentId = document.getElementById('inputStudentID').value;
+      const year = document.getElementById('inputYear').value;
+      const college = document.getElementById('College').value;
+      const goal = document.getElementById('inputGoal').value;
+      
+      // Update view values
+      document.getElementById('viewName').innerText = name;
+      document.getElementById('viewHeadingName').innerText = name;
+      document.getElementById('viewEmail').innerText = email;
+      document.getElementById('viewPhone').innerText = phone;
+      document.getElementById('viewStudentID').innerText = studentId;
+      document.getElementById('viewYear').innerText = year;
+      document.getElementById('viewHeadingYear').innerText = year;
+      document.getElementById('viewAddress').innerText = college;
+      document.getElementById('viewGoal').innerText = goal;
+      
+      // Save to localStorage so it persists across page reloads!
+      localStorage.setItem('studentProfile', JSON.stringify({
+        name, email, phone, studentId, year, college, goal
+      }));
+      
+      // Show success alert
+      const alertEl = document.getElementById('saveAlert');
+      alertEl.style.display = 'flex';
+      
+      // Hide alert and toggle mode back after 3.5 seconds
+      setTimeout(() => {
+        alertEl.style.display = 'none';
+      }, 3500);
+      
+      toggleMode(false);
+    }
+
+    // Go back to dashboard
+    function goBack() {
+      window.location.href = 'Dashboard.html';
+    }
+
+    // Load profile from localStorage on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedData = localStorage.getItem('studentProfile');
+      if (savedData) {
+        try {
+          const profile = JSON.parse(savedData);
+          document.getElementById('viewName').innerText = profile.name;
+          document.getElementById('viewHeadingName').innerText = profile.name;
+          document.getElementById('viewEmail').innerText = profile.email;
+          document.getElementById('viewPhone').innerText = profile.phone;
+          document.getElementById('viewStudentID').innerText = profile.studentId;
+          document.getElementById('viewYear').innerText = profile.year;
+          document.getElementById('viewHeadingYear').innerText = profile.year;
+          document.getElementById('viewAddress').innerText = profile.college;
+          document.getElementById('viewGoal').innerText = profile.goal;
+        } catch (e) {
+          console.error("Error parsing saved profile data:", e);
+        }
+      }
+    });
+  </script>
 </body>
 </html>
